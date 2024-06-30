@@ -13,10 +13,22 @@ body {
 }
 
 #intro-screen {
-    font-weight: bold;
-    color: #b6883d;
+    background-image: url('images/background.png'), url('images/background.png');
+    background-repeat: repeat-y;
+    background-size: 100% 50%;
+    color: white;
     padding: 20px;
+    text-align: center;
 }
+
+#intro-screen h1, #intro-screen h2, #intro-screen h3, #intro-screen p {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    margin: 10px 0;
+}
+
+
+
 
 .monster {
     margin: 10px 0;

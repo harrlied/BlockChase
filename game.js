@@ -48,23 +48,19 @@ function placeBody(board) {
     const index = Math.floor(Math.random() * startingPoints.length);
     const point = startingPoints[index];
 
-    console.log(`Attempting to place Body at (${point.x}, ${point.y})`);
-
-    if (isAreaClear(board, point.x, point.y, 2, 2)) {
-        body = {x: point.x, y: point.y};
-        for (let dy = 0; dy < 2; dy++) {
-            for (let dx = 0; dx < 2; dx++) {
-                board[point.y + dy][point.x + dx] = 'O';
-            }
-        }
-        console.log(`Body successfully placed at (${point.x}, ${point.y})`);
-        return true;
-    }
-    console.log(`Failed to place Body at (${point.x}, ${point.y})`);
-    return false;
+    body = {x: point.x, y: point.y};
+    board[point.y][point.x] = 'O';
+    board[point.y][point.x+1] = 'O1';
+    board[point.y+1][point.x] = 'O1';
+    board[point.y+1][point.x+1] = 'O1';
+    console.log(`Body placed at (${point.x}, ${point.y})`);
+    return true;
 }
 
 function isAreaClear(board, x, y, width, height) {
+    if (x < 1 || y < 1 || x + width > BOARD_SIZE - 1 || y + height > BOARD_SIZE - 1) {
+        return false;
+    }
     for (let dy = 0; dy < height; dy++) {
         for (let dx = 0; dx < width; dx++) {
             if (board[y + dy][x + dx] !== ' ') {
@@ -79,35 +75,45 @@ function moveBody() {
     if (gameWon || gameLost) return;
 
     const directions = [
-        {dx: 1, dy: 0},
-        {dx: -1, dy: 0},
-        {dx: 0, dy: 1},
-        {dx: 0, dy: -1}
+        {dx: 1, dy: 0, check: [{x: 2, y: 0}, {x: 2, y: 1}]},
+        {dx: -1, dy: 0, check: [{x: -1, y: 0}, {x: -1, y: 1}]},
+        {dx: 0, dy: 1, check: [{x: 0, y: 2}, {x: 1, y: 2}]},
+        {dx: 0, dy: -1, check: [{x: 0, y: -1}, {x: 1, y: -1}]}
     ];
 
     const direction = directions[Math.floor(Math.random() * directions.length)];
     const newX = body.x + direction.dx;
     const newY = body.y + direction.dy;
 
-    if (isAreaClear(newX, newY, 2, 2) && newX > 0 && newX < BOARD_SIZE - 2 && newY > 0 && newY < BOARD_SIZE - 2) {
+    if (canBodyMove(newX, newY, direction.check)) {
         // Clear old position
-        for (let dy = 0; dy < 2; dy++) {
-            for (let dx = 0; dx < 2; dx++) {
-                board[body.y + dy][body.x + dx] = ' ';
-            }
-        }
+        board[body.y][body.x] = ' ';
+        board[body.y][body.x+1] = ' ';
+        board[body.y+1][body.x] = ' ';
+        board[body.y+1][body.x+1] = ' ';
 
         // Set new position
         body.x = newX;
         body.y = newY;
-        for (let dy = 0; dy < 2; dy++) {
-            for (let dx = 0; dx < 2; dx++) {
-                board[body.y + dy][body.x + dx] = 'O';
-            }
-        }
+        board[body.y][body.x] = 'O';
+        board[body.y][body.x+1] = 'O1';
+        board[body.y+1][body.x] = 'O1';
+        board[body.y+1][body.x+1] = 'O1';
 
         drawBoard();
     }
+}
+
+function canBodyMove(newX, newY, checkPositions) {
+    for (let pos of checkPositions) {
+        const checkX = newX + pos.x;
+        const checkY = newY + pos.y;
+        if (checkX < 0 || checkY < 0 || checkX >= BOARD_SIZE || checkY >= BOARD_SIZE ||
+            board[checkY][checkX] !== ' ') {
+            return false;
+        }
+    }
+    return true;
 }
 
 
@@ -186,74 +192,40 @@ function generateRandomBoard() {
         }
     }
 
+
     console.log("Generating Tetris walls");
-    // Generate Tetris-shaped walls
     generateTetrisWalls(newBoard);
-    // generateRandomWalls(newBoard, numWalls);
 
-    // console.log("Attempting to place Body");
-    // let bodyPlaced = placeBody(newBoard);
-    // console.log(`Body placed: ${bodyPlaced}`);
+    console.log("Attempting to place Body");
+    let bodyPlaced = placeBody(newBoard);
+    console.log(`Body placed: ${bodyPlaced}`);
 
-    // if (!bodyPlaced) {
-    //     console.warn("Failed to place Body, continuing without it");
-    // }
-
-    // Place Body
-    // let bodyPlaced = false;
-    // let attempts = 0;
-    // while (!bodyPlaced && attempts < 10) {
-    //     bodyPlaced = placeBody(newBoard);
-    //     attempts++;
-    // }
-    // console.log(`Body placed: ${bodyPlaced}, attempts: ${attempts}`);
-
-    // if (!bodyPlaced) {
-    //     console.error("Failed to place Body after 10 attempts");
-    // }
+    if (!bodyPlaced) {
+        console.warn("Failed to place Body, continuing without it");
+    }
 
     console.log("Placing Player");
-
-
-    // Place Player
-    do {
-        player = placeRandomItem(newBoard, 'P');
-    } while (isNearBody(player.x, player.y));
+    player = placeRandomItem(newBoard, 'P');
 
     console.log("Placing other elements");
-    // Place Alien
-    do {
-        alien = placeRandomItem(newBoard, 'A');
-    } while (Math.abs(alien.x - player.x) <= 1 && Math.abs(alien.y - player.y) <= 1);
-    // alien = placeRandomItem(newBoard, 'A');
+    alien = placeRandomItem(newBoard, 'A');
     setRandomAlienDirection();
 
-    // Place Horny
-    do {
-        horny = placeRandomItem(newBoard, 'H');
-    } while (Math.abs(horny.x - player.x) <= 1 && Math.abs(horny.y - player.y) <= 1);
-    // horny = placeRandomItem(newBoard, 'H');
+    horny = placeRandomItem(newBoard, 'H');
 
-    // Place Sleepy
-    sleepy = null; // Reset sleepy before placing
-    do {
-        sleepy = placeRandomItem(newBoard, 'S');
-    } while (Math.abs(sleepy.x - player.x) <= 2 && Math.abs(sleepy.y - player.y) <= 2);
+    sleepy = placeRandomItem(newBoard, 'S');
 
-    // number of boxes and targets on the board
     const numTargets = 3;
     targets = [];
     for (let i = 0; i < numTargets; i++) {
-        let target;
-        do {
-            target = placeRandomItem(newBoard, 'T');
-        } while (targets.some(t => t.x === target.x && t.y === target.y));
+        let target = placeRandomItem(newBoard, 'T');
         targets.push(target);
     }
 
     for (let i = 0; i < numTargets; i++) {
         placeRandomBox(newBoard, 'B');
     }
+
     console.log("Board generation complete");
     return newBoard;
 }
@@ -397,34 +369,32 @@ function isAdjacentToWall(board, x, y) {
 function drawBoard() {
     console.log("Drawing board");
     gameBoard.innerHTML = '';
-    gameBoard.style.gridTemplateColumns = `repeat(${board[0].length}, 1fr)`;
+    gameBoard.style.gridTemplateColumns = `repeat(${BOARD_SIZE}, 1fr)`;
     for (let y = 0; y < BOARD_SIZE; y++) {
         for (let x = 0; x < BOARD_SIZE; x++) {
             const cell = document.createElement('div');
             cell.classList.add('cell');
             switch (board[y][x]) {
-                case 'W': cell.classList.add('wall'); break;  // W = Wall
-                case 'P': cell.classList.add('player'); break; // P = Player
-                case 'B': cell.classList.add('box'); break; // B = Box
-                case 'T': cell.classList.add('target'); break; // T = Target
-                case 'A': cell.classList.add('alien'); break; // A = Alien, was M = pacman1
-                case 'H': cell.classList.add('horny'); break; // H = Horny, was N = pacman2
-                case 'G': cell.classList.add('ghost'); break;  // G = ghost
-                case 'BT': cell.classList.add('box-on-target'); break; // BT = Box on Target
-                case 'S':                                               // S = Sleepy
+                case 'W': cell.classList.add('wall'); break;
+                case 'P': cell.classList.add('player'); break;
+                case 'B': cell.classList.add('box'); break;
+                case 'T': cell.classList.add('target'); break;
+                case 'A': cell.classList.add('alien'); break;
+                case 'H': cell.classList.add('horny'); break;
+                case 'G': cell.classList.add('ghost'); break;
+                case 'BT': cell.classList.add('box-on-target'); break;
+                case 'S':
                     cell.classList.add('sleepy');
-                    cell.style.backgroundImage = `url('${sleepyState === 'passive' ? 'sleepy_passive.png' : 'sleepy_active.png'}')`;
+                    cell.style.backgroundImage = `url('${sleepyState === 'passive' ? 'images/sleepy_passive.png' : 'images/sleepy_active.png'}')`;
                     break;
                 case 'O':
-                    if (x === body.x && y === body.y) {
-                        cell.classList.add('body');
-                        cell.style.gridColumn = 'span 2';
-                        cell.style.gridRow = 'span 2';
-                        x++; // Skip the next cell
-                    }
+                    cell.classList.add('body');
+                    cell.style.gridColumn = 'span 2';
+                    cell.style.gridRow = 'span 2';
                     break;
+                case 'O1':
+                    continue; // Skip this cell as it's part of the body
             }
-
             gameBoard.appendChild(cell);
         }
     }
@@ -452,7 +422,7 @@ function movePlayer(dx, dy) {
             return;
         }
     }
-    if (board[newY][newX] === 'O') {
+    if (board[newY][newX] === 'O' || board[newY][newX] === 'O1') {
         gameLost = true;
         winMessage.textContent = 'You ran into the Body! Game over.';
         clearAllIntervals();
@@ -685,9 +655,10 @@ function startNewGame() {
     winMessage.textContent = '';
 
     clearAllIntervals();
-    // placeBody();
-    // clearInterval(bodyInterval);
-    // bodyInterval = setInterval(moveBody, 2000); // Move every 2 seconds
+
+    if (body) {
+        bodyInterval = setInterval(moveBody, 2000); // Move every 2 seconds
+    }
 
     setRandomAlienDirection();
     alienInterval = setInterval(moveAlien, 500);
