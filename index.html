@@ -1,0 +1,70 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Game Intro and Play</title>
+     <link rel="stylesheet" href="style.css">
+ </head>
+ <body>
+     <div id="intro-screen">
+         <h1>Welcome to Sokoban Maze Adventure</h1>
+         <p>In this game, you will navigate through mazes, pushing boxes to targets while avoiding various monsters.</p>
+         <h2>Monsters</h2>
+         <div class="monster">
+             <img src="images/horny.png" alt="Horny">
+             <h3>Horny</h3>
+             <p>An orange demon with menacing horns. This relentless fiend constantly hunts the player, moving directly towards them. When obstructed, Horny resorts to random movement. Its speed is notably brisk, adding a sense of urgency to the chase.</p>
+         </div>
+         <div class="monster">
+             <img src="images/ghost.png" alt="Ghost">
+             <h3>Ghost</h3>
+             <p>A spectral entity donned in a red hat. After the player takes 6 steps, Ghost spawns at the player’s starting point and mimics their movements, trailing their exact path. Despite its spectral nature, Ghost moves at a sluggish pace, creating a creeping tension.</p>
+         </div>
+         <div class="monster">
+             <img src="images/sleepy_active.png" alt="Sleepy">
+             <h3>Sleepy</h3>
+             <p>A dual-natured red monster with a black hat. Sleepy alternates between two phases every 5 seconds: a dormant phase where it remains completely still, and an active phase where it dashes towards the player with remarkable speed. It never moves randomly, maintaining a focused pursuit even with obstacles in the way.</p>
+         </div>
+         <div class="monster">
+             <img src="images/alien.png" alt="Alien">
+             <h3>Alien</h3>
+             <p>A peculiar yellow creature with three eyes. Alien generally moves swiftly in a straight path but unpredictably changes direction upon hitting obstacles or entering new 6x6 grid zones. Its erratic movement adds an element of surprise and challenge.</p>
+         </div>
+         <div class="monster">
+            <img src="images/body.png" alt="Body">
+            <h3>Body</h3>
+            <p>A large, slow-moving creature that occupies a 2x2 space. It moves randomly and starts at one of the four central intersection points of the game area.</p>
+        </div>
+         <!-- <button id="new-game-btn">New game</button> -->
+         <button onclick="startGame()">Start Game</button>
+     </div>
+
+     <div id="game-container" style="display:none;">
+        <div id="game-board"></div>
+        <div id="game-info">
+            <span id="games-played">Games played: 0</span>
+            <span id="moves-count">Moves: 0</span>
+            <span id="win-message"></span>
+        </div>
+        <div id="control-buttons">
+            <div class="left-controls">
+                <button id="up-btn">↑</button>
+                <div class="horizontal-buttons">
+                    <button id="down-btn">←</button>
+                    <button id="left-btn">↓</button>
+                    <button id="right-btn">→</button>
+                </div>
+            </div>
+            <div class="right-controls">
+                <button id="new-random-game-btn">New Random Game</button>
+                <button id="restart-game-btn">Restart Game</button>
+                <button id="back-to-intro-btn" onclick="showIntro()">Back to Intro</button>
+            </div>
+        </div>
+    </div>
+
+     <script src="intro.js"></script>
+     <script src="game.js"></script>
+ </body>
+ </html>

@@ -1,0 +1,280 @@
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #333333;
+}
+
+#intro-screen {
+    padding: 20px;
+}
+
+.monster {
+    margin: 10px 0;
+}
+
+.monster img {
+    width: 50px;
+    height: 50px;
+}
+
+#game-screen {
+    display: none;
+}
+
+#control-buttons {
+    margin-top: 20px;
+}
+
+#control-buttons button {
+    margin: 5px;
+    padding: 10px;
+}
+
+/* Moves the control buttons down */
+/* #new-random-game-btn, #restart-game-btn, #back-to-intro-btn {
+    margin-top: 20px;
+} */
+
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: rgba(255, 255, 255, 0.95); */
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    /* padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+#game-board {
+    display: grid;
+    gap: 0px;
+    background-image: url('images/background.png');
+    background-size: cover;
+    background-position: -4px -4px;
+    background-position: center;
+    width: 900px;
+    height: 900px;
+    margin-bottom: 20px;
+    border: 2px solid #333;
+    padding: 0px;
+    background-color: rgba(221, 221, 221, 0.8);
+}
+
+#game-info {
+    display: flex;
+    justify-content: space-between;
+    /* color: #ffffff; */
+    color: #4CAF50;
+    font-weight: bold;
+    font-size: 18px;
+    width: 100%;
+    margin: 10px 0;
+}
+
+#control-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.left-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.horizontal-buttons {
+    display: flex;
+    gap: 30px;
+}
+
+.right-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#up-btn, #down-btn, #left-btn, #right-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+}
+
+#up-btn {
+    margin-bottom: 10px;
+}
+
+#new-random-game-btn, #restart-game-btn, #back-to-intro-btn {
+    margin-bottom: 10px;
+}
+
+
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#status-bar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+
+.cell {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wall {
+    background-image: url('images/wall.png');
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+}
+
+.player {
+    background-image: url('images/player.png');
+    background-size: cover;
+}
+
+.box {
+    background-image: url('images/box.png');
+    background-size: cover;
+}
+
+.target {
+    background-image: url('images/target.png');
+    background-size: cover;
+}
+
+.alien {
+    background-image: url('images/alien.png');
+    background-size: cover;
+}
+
+.horny {
+    background-image: url('images/horny.png');
+    background-size: cover;
+}
+
+.ghost {
+    background-image: url('images/ghost.png');
+    background-size: cover;
+}
+
+.sleepy {
+    background-image: url('images/sleepy_passive.png');
+    background-size: cover;
+    /* background-position: center; */
+}
+
+.body {
+    background-image: url('images/body.png');
+    background-size: cover;
+
+    /* background-size: 100% 100%; */
+    width: 100px;
+    height: 100px;
+}
+
+.box-on-target {
+    background-image: url('images/box2.png');
+    background-size: cover;
+}
+
+#controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #3aaa35;
+}
+
+#new-game-btn {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#new-game-btn:hover {
+    background-color: #3aaa35;
+}
+
+#new-random-game-btn {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#new-random-game-btn:hover {
+    background-color: #136010;
+}
+
+#restart-game-btn {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#restart-game-btn:hover {
+    background-color: #136010;
+}
+
+#win-message {
+    margin-top: 5px;
+    font-weight: bold;
+    color: #4CAF50;
+}
