@@ -140,7 +140,7 @@ function setupEventListeners() {
     document.addEventListener('keydown', handleKeyPress);
 
     // Set up on-screen control buttons
-    ['up', 'down', 'left', 'right'].forEach(direction => {
+    ['up', 'left', 'down', 'right'].forEach(direction => {
         const button = document.getElementById(`${direction}-btn`);
         if (button) {
             button.addEventListener('click', () => handleDirectionButton(direction));

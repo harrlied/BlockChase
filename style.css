@@ -210,7 +210,8 @@ button {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #4CAF50;
+    /* background-color: #4CAF50; */
+    background-color: #dd4817;
     color: white;
     border: none;
     border-radius: 15px;
@@ -222,6 +223,27 @@ button:hover {
     background-color: #3aaa35;
 }
 
+
+button_arrow {
+    display: block;
+    margin-top: 50px;
+    padding: 50px 50px;
+    align-items: center;
+    font-weight: bold;
+    font-size: 32px;
+    /* background-color: #4CAF50; */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button_arrow:hover {
+    background-color: #136010;
+}
+/*
 #new-game-btn {
     display: block;
     margin-top: 20px;
@@ -237,7 +259,7 @@ button:hover {
 
 #new-game-btn:hover {
     background-color: #3aaa35;
-}
+} */
 
 #new-random-game-btn {
     display: block;
