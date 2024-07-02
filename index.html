@@ -8,123 +8,132 @@
  </head>
  <body>
      <div id="intro-screen">
-         <h1>Welcome to BlockChase Maze Adventure</h1>
-         <p>In this game, you will navigate through mazes, pushing boxes to targets while avoiding various monsters.</p>
-         <h2>Monsters</h2>
-         <div class="monster">
-            <img src="images/horny.png" alt="Horny">
-            <div class="monster-info">
-                <h3>Horny</h3>
-                <p>An orange demon with menacing horns. This relentless fiend constantly hunts the player, moving directly towards them. When obstructed, Horny resorts to random movement. Its speed is notably brisk, adding a sense of urgency to the chase.</p>
+        <div class="wall-container"></div>
+            <h1>Welcome to BlockChase Maze Adventure</h1>
+            <p>In this game, you will navigate through mazes, pushing boxes to targets while avoiding various monsters.</p>
+            <h2>Monsters</h2>
+            <div class="monster">
+                <img src="images/horny.png" alt="Horny">
+                <div class="monster-info">
+                    <h3>Horny</h3>
+                    <p>An orange demon with menacing horns. This relentless fiend constantly hunts the player, moving directly towards them. When obstructed, Horny resorts to random movement. Its speed is notably brisk, adding a sense of urgency to the chase.</p>
+                </div>
             </div>
-        </div>
-         <div class="monster">
-             <img src="images/ghost.png" alt="Ghost">
-             <div class="monster-info">
-                <h3>Ghost</h3>
-                <p>A spectral entity donned in a red hat. After the player takes 6 steps, Ghost spawns at the player’s starting point and mimics their movements, trailing their exact path. Despite its spectral nature, Ghost moves at a sluggish pace, creating a creeping tension.</p>
+
+            <div class="monster">
+                <img src="images/ghost.png" alt="Ghost">
+                <div class="monster-info">
+                    <h3>Ghost</h3>
+                    <p>A spectral entity donned in a red hat. After the player takes 6 steps, Ghost spawns at the player’s starting point and mimics their movements, trailing their exact path. Despite its spectral nature, Ghost moves at a sluggish pace, creating a creeping tension.</p>
+                </div>
             </div>
-        </div>
-         <div class="monster">
-             <img src="images/sleepy_active.png" alt="Sleepy">
-             <div class="monster-info">
-                <h3>Sleepy</h3>
-                <p>A dual-natured red monster with a black hat. Sleepy alternates between two phases every 5 seconds: a dormant phase where it remains completely still, and an active phase where it dashes towards the player with remarkable speed. It never moves randomly, maintaining a focused pursuit even with obstacles in the way.</p>
+            <div class="monster">
+                <img src="images/sleepy_active.png" alt="Sleepy">
+                <div class="monster-info">
+                    <h3>Sleepy</h3>
+                    <p>A dual-natured red monster with a black hat. Sleepy alternates between two phases every 5 seconds: a dormant phase where it remains completely still, and an active phase where it dashes towards the player with remarkable speed. It never moves randomly, maintaining a focused pursuit even with obstacles in the way.</p>
+                </div>
             </div>
-        </div>
-        <div class="monster">
-             <img src="images/alien.png" alt="Alien">
-             <div class="monster-info">
-                <h3>Alien</h3>
-                <p>A peculiar yellow creature with three eyes. Alien generally moves swiftly in a straight path but unpredictably changes direction upon hitting obstacles or entering new 6x6 grid zones. Its erratic movement adds an element of surprise and challenge.</p>
+            <div class="monster">
+                <img src="images/alien.png" alt="Alien">
+                <div class="monster-info">
+                    <h3>Alien</h3>
+                    <p>A peculiar yellow creature with three eyes. Alien generally moves swiftly in a straight path but unpredictably changes direction upon hitting obstacles or entering new 6x6 grid zones. Its erratic movement adds an element of surprise and challenge.</p>
+                </div>
             </div>
-        </div>
-        <div class="monster">
-            <img src="images/body.png" alt="Body">
-            <div class="monster-info">
-                <h3>Body</h3>
-                <p>A large, slow-moving creature that occupies a 2x2 space. It moves randomly and starts at one of the four central intersection points of the game area.</p>
+            <div class="monster">
+                <img src="images/body.png" alt="Body">
+                <div class="monster-info">
+                    <h3>Body</h3>
+                    <p>A large, slow-moving creature that occupies a 2x2 space. It moves randomly and starts at one of the four central intersection points of the game area.</p>
+                </div>
             </div>
-        </div>
-        <div class="monster">
-            <img src="images/plague.png" alt="Plaque">
-            <div class="monster-info">
-                <h3>Plague</h3>
-                <p>A green, slimy mass with terrifying teeth at its center. This monster starts small but grows as it moves, leaving a trail behind. It can grow up to five segments long, creating a challenging obstacle for the player to navigate around.</p>
+            <div class="monster">
+                <img src="images/plague.png" alt="Plaque">
+                <div class="monster-info">
+                    <h3>Plague</h3>
+                    <p>A green, slimy mass with terrifying teeth at its center. This monster starts small but grows as it moves, leaving a trail behind. It can grow up to five segments long, creating a challenging obstacle for the player to navigate around.</p>
+                </div>
             </div>
-        </div>
+
         <div id="monster-selection">
             <h2>Select Monsters (Choose 4)</h2>
-            <div class="monster-checkbox">
-                <input type="checkbox" id="horny-check" checked>
-                <label for="horny-check">Horny</label>
-                <select id="horny-level">
-                    <option value="1">Level 1</option>
-                    <option value="2">Level 2</option>
-                    <option value="3" selected>Level 3</option>
-                    <option value="4">Level 4</option>
-                    <option value="5">Level 5</option>
-                </select>
+            <div class="monster-checkbox-container">
+                <div class="monster-checkbox">
+                    <input type="checkbox" id="horny-check" checked>
+                    <label for="horny-check">Horny</label>
+                    <select id="horny-level">
+                        <option value="1">Level 1</option>
+                        <option value="2">Level 2</option>
+                        <option value="3" selected>Level 3</option>
+                        <option value="4">Level 4</option>
+                        <option value="5">Level 5</option>
+                    </select>
+                </div>
+                <div class="monster-checkbox">
+                    <input type="checkbox" id="ghost-check" checked>
+                    <label for="ghost-check">Ghost</label>
+                    <select id="ghost-level">
+                        <option value="1">Level 1</option>
+                        <option value="2">Level 2</option>
+                        <option value="3" selected>Level 3</option>
+                        <option value="4">Level 4</option>
+                        <option value="5">Level 5</option>
+                    </select>
+                </div>
+                <div class="monster-checkbox">
+                    <input type="checkbox" id="sleepy-check" checked>
+                    <label for="sleepy-check">Sleepy</label>
+                    <select id="sleepy-level">
+                        <option value="1">Level 1</option>
+                        <option value="2">Level 2</option>
+                        <option value="3" selected>Level 3</option>
+                        <option value="4">Level 4</option>
+                        <option value="5">Level 5</option>
+                    </select>
+                </div>
+                <div class="monster-checkbox">
+                    <input type="checkbox" id="alien-check" checked>
+                    <label for="alien-check">Alien</label>
+                    <select id="alien-level">
+                        <option value="1">Level 1</option>
+                        <option value="2">Level 2</option>
+                        <option value="3" selected>Level 3</option>
+                        <option value="4">Level 4</option>
+                        <option value="5">Level 5</option>
+                    </select>
+                </div>
+                <div class="monster-checkbox">
+                    <input type="checkbox" id="body-check">
+                    <label for="body-check">Body</label>
+                    <select id="body-level">
+                        <option value="1">Level 1</option>
+                        <option value="2">Level 2</option>
+                        <option value="3" selected>Level 3</option>
+                        <option value="4">Level 4</option>
+                        <option value="5">Level 5</option>
+                    </select>
+                </div>
+                <div class="monster-checkbox">
+                    <input type="checkbox" id="plague-check">
+                    <label for="plague-check">Plague</label>
+                    <select id="plague-level">
+                        <option value="1">Level 1</option>
+                        <option value="2">Level 2</option>
+                        <option value="3" selected>Level 3</option>
+                        <option value="4">Level 4</option>
+                        <option value="5">Level 5</option>
+                    </select>
+                </div>
             </div>
-            <div class="monster-checkbox">
-                <input type="checkbox" id="ghost-check" checked>
-                <label for="ghost-check">Ghost</label>
-                <select id="ghost-level">
-                    <option value="1">Level 1</option>
-                    <option value="2">Level 2</option>
-                    <option value="3" selected>Level 3</option>
-                    <option value="4">Level 4</option>
-                    <option value="5">Level 5</option>
-                </select>
+            <div class="control-option" style="margin-left: 20px;">
+                <input type="checkbox" id="show-arrow-controls" name="show-arrow-controls">
+                <label for="show-arrow-controls">Show arrow controls (for mobile devices)</label>
             </div>
-            <div class="monster-checkbox">
-                <input type="checkbox" id="sleepy-check" checked>
-                <label for="sleepy-check">Sleepy</label>
-                <select id="sleepy-level">
-                    <option value="1">Level 1</option>
-                    <option value="2">Level 2</option>
-                    <option value="3" selected>Level 3</option>
-                    <option value="4">Level 4</option>
-                    <option value="5">Level 5</option>
-                </select>
-            </div>
-            <div class="monster-checkbox">
-                <input type="checkbox" id="alien-check" checked>
-                <label for="alien-check">Alien</label>
-                <select id="alien-level">
-                    <option value="1">Level 1</option>
-                    <option value="2">Level 2</option>
-                    <option value="3" selected>Level 3</option>
-                    <option value="4">Level 4</option>
-                    <option value="5">Level 5</option>
-                </select>
-            </div>
-            <div class="monster-checkbox">
-                <input type="checkbox" id="body-check">
-                <label for="body-check">Body</label>
-                <select id="body-level">
-                    <option value="1">Level 1</option>
-                    <option value="2">Level 2</option>
-                    <option value="3" selected>Level 3</option>
-                    <option value="4">Level 4</option>
-                    <option value="5">Level 5</option>
-                </select>
-            </div>
-            <div class="monster-checkbox">
-                <input type="checkbox" id="plague-check">
-                <label for="plague-check">Plague</label>
-                <select id="plague-level">
-                    <option value="1">Level 1</option>
-                    <option value="2">Level 2</option>
-                    <option value="3" selected>Level 3</option>
-                    <option value="4">Level 4</option>
-                    <option value="5">Level 5</option>
-                </select>
-            </div>
-        </div>
-         <button id="new-game-btn" onclick="startGame()">New game</button>
+            <button id="new-game-btn" onclick="startGame()">New game</button>
          <!-- <button onclick="startGame()">Start Game</button> -->
-     </div>
+        </div>
+    </div>
 
      <div id="game-container" style="display:none;">
         <div id="game-board"></div>

@@ -12,10 +12,10 @@ body {
     background-color: #333333;
 }
 #intro-screen {
-    background-image: url('images/background.png'), url('images/background.png');
+    background-image: url('images/background.png');
     background-repeat: repeat-y;
     background-size: 900px auto;
-    background-position: center top, center bottom;
+    background-position: center;
     color: white;
     padding: 20px;
     text-align: center;
@@ -24,6 +24,30 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    position: relative;
+    box-sizing: border-box;
+    padding-top: 50px;  /* Add padding to accommodate the top wall */
+    padding-bottom: 50px;  /* Add padding to accommodate the bottom wall */
+}
+
+#intro-screen::before,
+#intro-screen::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background-image: url('images/wall.png');
+    background-repeat: repeat-x;
+    background-size: 50px 50px;
+}
+
+#intro-screen::before {
+    top: 0;
+}
+
+#intro-screen::after {
+    bottom: 0;
 }
 
 #intro-screen h1 {
@@ -33,6 +57,11 @@ body {
     margin: 10px 0;
 }
 
+.control-option {
+    margin-top: 20px;
+    text-align: left;
+    color: white;
+}
 
 #intro-screen h1, #intro-screen h2, #intro-screen h3, #intro-screen p {
     background-color: transparent; /* Poistetaan tausta */
@@ -55,24 +84,50 @@ body {
 
 .monster {
     display: flex;
-    align-items: center;
-    margin: 10px 0;
-    max-width: 900px;
+    align-items: flex-start;
+    margin: 20px 0;
+    text-align: left;
+}
+
+/* Kavennetaan tekstiblokkeja */
+.monster, #monster-selection, .control-option, #new-game-btn {
+    margin-top: 20px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@keyframes monsterFloat {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
 }
 
 .monster img {
     width: 50px;
     height: 50px;
     margin-right: 20px; /* Lisätään oikean puolen marginaalia */
-    margin-left: 20px; /* Lisätään vasemman puolen marginaalia */
+    /* margin-left: 20px;  */
+    /* Lisätään vasemman puolen marginaalia */
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 50px; /* Move the image down */
+
+    /* transition: transform 0.5s ease; */
+}
+
+.monster img.floating {
+    animation: monsterFloat 2s ease-in-out infinite;
 }
 
 .monster-info {
-    text-align: left;
+    flex-grow: 1;
 }
 
 .monster-info h3 {
-    margin-bottom: 5px; /* Pienennetään alamarginaalia */
+    margin-top: 0;
+    margin-bottom: 5px; /* Reduce space between name and description */
+    color: #FFD700;
 }
 
 .monster-info p {
@@ -140,8 +195,13 @@ body {
 
 .horizontal-buttons {
     display: flex;
-    gap: 30px;
+    gap: 60px;
 }
+
+#down-btn {
+    margin-right: 120px; /* Lisätään iso väli alas- ja vasemmalle-näppäinten väliin */
+}
+
 
 .right-controls {
     display: flex;
@@ -207,12 +267,16 @@ body {
 }
 
 button_arrow {
-    display: block;
-    margin-top: 50px;
-    padding: 50px 50px;
+    display: flex;
+    justify-content: center;
     align-items: center;
+    margin-top: 50px;
+    width: 200px;
+    height: 200px;
     font-weight: bold;
-    font-size: 32px;
+    font-size: 96px;
+    margin: 10px;
+    padding: 20px 20px;
     background-color: #8d6a2f;
     color: white;
     border: none;
@@ -254,6 +318,15 @@ h1 {
     height: 50px;
     background-size: cover;
 }
+
+.wall-container {
+    /* border: 10px solid transparent; */
+    /* border-image: url('images/wall.png') 50 round; */
+    /* padding: 20px; */
+    width: 100%;
+    box-sizing: border-box;
+}
+
 
 .player {
     background-image: url('images/player.png');
@@ -315,22 +388,33 @@ h1 {
 
 #monster-selection {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: flex-start;
     margin-bottom: 20px;
 }
 
-.monster-checkbox {
+#monster-selection h2 {
+    margin-bottom: 10px;
+}
+
+.monster-checkbox-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.monster-checkbox {
+    margin-right: 20px;
+    margin-bottom: 10px;
 }
 
 .monster-checkbox select {
     margin-top: 5px;
 }
 
+.monster-checkbox label {
+    color: black;
+}
 
 #win-message {
     margin-top: 5px;
